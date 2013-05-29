@@ -91,4 +91,20 @@ describe("KMeans", function() {
 
   });
 
+
+  it("counts changed assignments", function() {
+
+    var oldAssignments = [ 0, 0, 1, 1 ];
+    var newAssignments = [ 0, 0, 1, 1 ];
+
+    expect(kmeans.countChangedAssignments(oldAssignments, newAssignments)).toEqual(0);
+
+    newAssignments[0] = 1;
+    expect(kmeans.countChangedAssignments(oldAssignments, newAssignments)).toEqual(1);
+
+    newAssignments[1] = 1;
+    expect(kmeans.countChangedAssignments(oldAssignments, newAssignments)).toEqual(2);
+
+  });
+
 });
