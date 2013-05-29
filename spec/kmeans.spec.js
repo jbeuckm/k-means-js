@@ -44,6 +44,10 @@ describe("KMeans", function() {
 
     expect(kmeans.distance(point1, point2)).toEqual(5);
 
+    point1 = [0,0,0]; point2 = [0,3,4];
+
+    expect(kmeans.distance(point1, point2)).toEqual(5);
+
   });
 
 
@@ -68,5 +72,23 @@ describe("KMeans", function() {
 
   });
 
+
+  it("assigns points to their closest mean", function() {
+
+    var means = [
+      [0,0],
+      [10,10]
+    ];
+
+    var points = [
+      [1,1],[2,2],
+      [8,8],[9,9]
+    ];
+
+    var assignments = kmeans.assignPointsToMeans(points, means);
+
+    expect(assignments).toEqual([0,0,1,1]);
+
+  });
 
 });
