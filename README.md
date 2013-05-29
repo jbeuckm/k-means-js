@@ -6,9 +6,6 @@ A basic Javascript implementation of the document classification algorithm.
 Usage
 -----
 ```javascript
-
-
-
 var points = [
   [1, 2, 3],
   [4, 5, 6],
