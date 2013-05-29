@@ -46,4 +46,27 @@ describe("KMeans", function() {
 
   });
 
+
+  it("assigns a datapoint to the closest mean", function() {
+
+    var means = [
+      [0,0],
+      [5,0],
+      [0,5],
+      [10,10]
+    ];
+
+    expect(kmeans.findClosestMean([0,0], means)).toEqual(0);
+    expect(kmeans.findClosestMean([4,0], means)).toEqual(1);
+    expect(kmeans.findClosestMean([9,9], means)).toEqual(3);
+
+  });
+
+  it("finds the index of the smallest number in an array", function() {
+
+    expect(kmeans.findIndexOfMinimum([5, 8, 3, 9])).toEqual(2);
+
+  });
+
+
 });
