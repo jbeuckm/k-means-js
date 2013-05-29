@@ -19,7 +19,7 @@ describe("KMeans", function() {
     var ranges = kmeans.findRanges(data);
     var dimensions = ranges.length;
 
-    var means = kmeans.generateRandomMeans(ranges, 2);
+    var means = kmeans.generateRandomPoints(ranges, 2);
 
     expect(means.length).toEqual(2);
 
@@ -34,6 +34,15 @@ describe("KMeans", function() {
         expect(mean[d]).not.toBeGreaterThan(ranges[d][1]);
       }
     }
+
+  });
+
+
+  it("calculates Euclidean distance between two points", function() {
+
+    var point1 = [0,0,0], point2 = [3,4,0];
+
+    expect(kmeans.distance(point1, point2)).toEqual(5);
 
   });
 
