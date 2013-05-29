@@ -107,4 +107,24 @@ describe("KMeans", function() {
 
   });
 
+
+  it("adjusts the means array according to assigned points", function() {
+
+    var means = [ [0,0], [10,10] ];
+    var points = [ [1,1],[2,2],[8,8],[9,9] ];
+    var assignments = kmeans.assignPointsToMeans(points, means);
+
+    var newMeans = kmeans.moveMeansToCenters(points, assignments, means);
+
+    expect(newMeans.length).toEqual(means.length);
+
+  });
+
+
+  it("finds the average of a pointset", function() {
+
+    expect(kmeans.averagePosition([[0,0,0],[1,1,1]])).toEqual([.5,.5,.5]);
+
+  });
+
 });
