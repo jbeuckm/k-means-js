@@ -14,7 +14,7 @@ describe("KMeans", function() {
   });
 
 
-  it("should create K random means within range", function() {
+  it("should create K random points within specified ranges", function() {
 
     var ranges = kmeans.findRanges(data);
     var dimensions = ranges.length;
@@ -117,7 +117,6 @@ describe("KMeans", function() {
     var newMeans = kmeans.moveMeansToCenters(points, assignments, means);
 
     expect(newMeans.length).toEqual(means.length);
-
   });
 
 
