@@ -14,7 +14,9 @@ var points = [
   [7, 8, 9]
 ];
 
-var means = require('kmeans').algorithm(points, 2, console.log);
+var k = 2;
+
+var means = require('kmeans').algorithm(points, k, console.log);
 ```
 
 The call to algorithm() will find the data's range in each dimension, generate k=2 random points, and iterate until the means are static.
@@ -22,3 +24,5 @@ The call to algorithm() will find the data's range in each dimension, generate k
 Todo
 ----
 
+* build an asynchronous version of the algorithm
+* implement a heuristic or two to find an appropriate k
