@@ -24,6 +24,7 @@ The call to algorithm() will find the data's range in each dimension, generate k
 Todo
 ----
 
+* provide ability to label data points
 * build an asynchronous version of the algorithm
 * implement a heuristic or two to find an appropriate k
 * build a few functions to analyze the result for how well it models the variations
