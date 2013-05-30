@@ -5,6 +5,14 @@ describe("KMeans", function() {
 
   var data = [ [0,1,2], [3,4,5], [6,7,8] ];
 
+
+    it("counts the number of points assigned to each mean", function() {
+
+        var assignments = [0,0,0,1,1,2];
+
+        expect(kmeans.countPointsPerMean(assignments)).toEqual({ 0:3, 1:2, 2:1 });
+    });
+
   it("should find ranges in a data array", function() {
 
     var ranges = kmeans.findRanges(data);
