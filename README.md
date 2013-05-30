@@ -26,3 +26,4 @@ Todo
 
 * build an asynchronous version of the algorithm
 * implement a heuristic or two to find an appropriate k
+* build a few functions to analyze the result for how well it models the variations
