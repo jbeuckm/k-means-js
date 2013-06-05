@@ -1,5 +1,6 @@
 K-Means Clustering
 ==================
+[![Build Status](https://travis-ci.org/jbeuckm/K-Means.png)](https://travis-ci.org/jbeuckm/K-Means)
 
 A basic Javascript implementation of the [cluster analysis] [1] algorithm.
 
