@@ -5,5 +5,14 @@
     "description": "A basic Javascript implementation of the cluster analysis algorithm.",
     "scripts": {
         "test": "jasmine-node spec/*.spec.js"
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jbeuckm/K-Means.git"
+    },
+    "keywords": [
+        "machine learning",
+        "cluster analysis",
+        "k-means"
+    ]
 }
