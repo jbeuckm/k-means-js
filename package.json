@@ -1,4 +1,8 @@
 {
+    "name": "K-Means",
+    "version": "0.1.0",
+    "author": "Joe Beuckmnan <joe@beigerecords.com>",
+    "description": "A basic Javascript implementation of the cluster analysis algorithm.",
     "scripts": {
         "test": "jasmine-node spec/*.spec.js"
     }
