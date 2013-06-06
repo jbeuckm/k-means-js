@@ -1,1 +1,1 @@
-browserify main.js | uglifyjs > build/kmeans.min.js
+browserify main.js -s | uglifyjs > build/kmeans.min.js
