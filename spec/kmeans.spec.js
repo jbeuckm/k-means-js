@@ -134,6 +134,8 @@ describe("KMeans", function() {
 
   });
 
+
+
   it("finds the average separation in a set of points", function() {
     var points = [ [3,0], [0,4] ];
     var sep = kmeans.findAverageMeanSeparation(points);
