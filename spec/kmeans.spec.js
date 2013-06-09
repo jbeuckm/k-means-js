@@ -134,4 +134,18 @@ describe("KMeans", function() {
 
   });
 
+  it("finds the average separation in a set of points", function() {
+    var points = [ [3,0], [0,4] ];
+    var sep = kmeans.findAverageMeanSeparation(points);
+    expect(sep).toEqual(5);
+
+    points = [ [0,0], [1,0], [2,0] ];
+    sep = kmeans.findAverageMeanSeparation(points);
+    expect(sep).toEqual(4/3);
+
+    points = [ [0,0], [1,0], [0,1], [1,1] ];
+    sep = kmeans.findAverageMeanSeparation(points);
+    expect(sep).toEqual((4+2*Math.sqrt(2))/6);
+  });
+
 });
