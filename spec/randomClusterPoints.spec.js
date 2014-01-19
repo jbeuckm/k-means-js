@@ -6,22 +6,32 @@ describe("Random Cluster Points", function() {
     var rcp = require('../lib/randomClusterPoints');
 
     beforeEach(function() {
-
         rcp.init(ranges, 3);
     });
 
-    it("generates bell curve descriptions for each dimension", function() {
+  it("generates bell curve descriptions for each dimension", function() {
 
-        var curves = rcp.init(ranges, 3);
+    var curves = rcp.init(ranges, 3);
 
-        expect(curves.length).toEqual(3);
-    });
+    expect(curves.length).toEqual(3);
+  });
 
-    it("generates a point", function() {
+  it("picks a random number within a range", function() {
 
-        var point = rcp.generatePoint();
+    var component = rcp.genrand(0, 1, 0, 1, 1);
 
-        expect(point.length).not.toBeNull();
-    });
+    if (component != 0) {
+      expect(component).toBeGreaterThan(0);
+    }
+
+    expect(component).toBeLessThan(1);
+  });
+
+  it("generates a point", function() {
+      var point = rcp.generatePoint();
+
+    expect(point.length).not.toBeNull();
+    expect(point.length).toEqual(3);
+  });
 
 });
