@@ -17,19 +17,19 @@ describe("Find best value of K", function() {
     points = [];
     for (var i=0; i<10; i++) {
       points.push([
-        bell(.95,.1),
-        bell(.05,.1),
-        bell(.05,.1)
+        bell(10,.5),
+        bell(0,.5),
+        bell(0,.5)
       ]);
       points.push([
-        bell(.05,.1),
-        bell(.95,.1),
-        bell(.05,.1)
+        bell(0,.5),
+        bell(10,.5),
+        bell(0,.5)
       ]);
       points.push([
-        bell(.05,.1),
-        bell(.05,.1),
-        bell(.95,.1)
+        bell(0,.5),
+        bell(0,.5),
+        bell(10,.5)
       ]);
     }
 
@@ -95,11 +95,15 @@ describe("Find best value of K", function() {
     expect(bestK).toBeLessThan(10);
   });
 
+
   it("estimates the best value for K", function(){
 
-    var bestK = pbk.findBestK(points, 10).bestK;
-    expect(bestK).toBeGreaterThan(1);
-    expect(bestK).toBeLessThan(10);
+    var bestK = pbk.findBestK(points, 10);
+    expect(bestK.K).toBeGreaterThan(1);
+    expect(bestK.K).toBeLessThan(10);
+
+    console.log(bestK.means);
+    expect(bestK.means.length).toEqual(bestK.K);
 
   });
 
