@@ -88,8 +88,12 @@ describe("Find best value of K", function() {
     }
 
     expect(bestK).toEqual(3);
+    expect(bestK).toBeGreaterThan(1);
+    expect(bestK).toBeLessThan(10);
 
-    expect(pbk.findBestK(points, 10).bestK).toEqual(3);
+    bestK = pbk.findBestK(points, 10).bestK;
+    expect(bestK).toBeGreaterThan(1);
+    expect(bestK).toBeLessThan(10);
 
   });
 
