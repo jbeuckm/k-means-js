@@ -15,7 +15,7 @@ describe("Find best value of K", function() {
 
     // three obvious clusters
     points = [];
-    for (var i=0; i<10; i++) {
+    for (var i=0; i<100; i++) {
       points.push([
         bell(10,.5),
         bell(0,.5),
