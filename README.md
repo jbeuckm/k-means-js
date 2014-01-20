@@ -31,7 +31,7 @@ var pbk = require('phamBestK');
 var maxKToTest = 10;
 var result = pbk.findBestK(points, maxKToTest);
 
-console.log("this data has "+result.K+" clusters);
+console.log("this data has "+result.K+" clusters");
 console.log("cluster centroids = "+result.means);
 ```
 
