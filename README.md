@@ -38,5 +38,6 @@ console.log("cluster centroids = "+result.means);
 Todo
 ----
 
+* Normalize and denormalize data
 * provide ability to label data points, dimensions and means
 * build an asynchronous version of the algorithm
