@@ -14,7 +14,7 @@ Usage
 The normalizer will scale numerical data between [0,1] and will generate n outputs of either zero or one for discrete data, eg. category.
 
 ```javascript
-// tell the normalizer about the category field
+// Tell the normalizer about the category field.
 var params = {
    category: "discrete"
 };
