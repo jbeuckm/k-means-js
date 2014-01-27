@@ -45,7 +45,7 @@ describe("Dataset", function() {
         normalized = dataset.normalize(data, ranges);
 
         expect(normalized.length).toEqual(data.length);
-
+        expect(normalized[0].length).toEqual(3);
     });
 
 });
