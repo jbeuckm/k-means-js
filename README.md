@@ -57,7 +57,7 @@ var k = 3;
 var means = require('kmeans').algorithm(points, k, console.log);
 ```
 
-The call to algorithm() will find the data's range in each dimension, generate k=2 random points, and iterate until the means are static.
+The call to algorithm() will find the data's range in each dimension, generate k=3 random points, and iterate until the means are static.
 
 * Find the best K
 
@@ -77,6 +77,6 @@ console.log("cluster centroids = "+result.means);
 Todo
 ----
 
-* Normalize and denormalize data
+* denormalize data
 * provide ability to label data points, dimensions and means
 * build an asynchronous version of the algorithm
