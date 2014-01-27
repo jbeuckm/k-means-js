@@ -26,11 +26,25 @@ describe("Dataset", function() {
         category: "discrete"
     };
 
+    var ranges;
+
     it("finds data ranges", function() {
 
-        var ranges = dataset.findRanges(params, data);
+        ranges = dataset.findRanges(params, data);
 
-        console.log(ranges);
+        expect(ranges["category"].type).toEqual("discrete");
+        expect(ranges["category"].values.length).toEqual(2);
+
+        expect(ranges["value"].type).toEqual("linear");
+        expect(ranges["value"].min).toEqual(1);
+        expect(ranges["value"].max).toEqual(100);
+    });
+
+    it("normalizes data", function() {
+
+        normalized = dataset.normalize(data, ranges);
+
+        expect(normalized.length).toEqual(data.length);
 
     });
 
