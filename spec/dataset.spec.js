@@ -48,4 +48,18 @@ describe("Dataset", function() {
         expect(normalized[0].length).toEqual(3);
     });
 
-});
+    it("denormalizes data", function() {
+
+      ranges = dataset.findRanges(params, data);
+
+      normalized = dataset.normalize(data, ranges);
+
+      for (var i= 0, l=normalized.length; i<l; i++) {
+
+        var denorm = dataset.denormalizeDatum(normalized[i], ranges);
+        expect(denorm).toEqual(data[i]);
+      }
+
+    });
+
+  });
