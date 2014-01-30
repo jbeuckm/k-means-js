@@ -57,6 +57,12 @@ describe("Dataset", function() {
       for (var i= 0, l=normalized.length; i<l; i++) {
 
         var denorm = dataset.denormalizeDatum(normalized[i], ranges);
+
+        console.log("testing normalized:");
+        console.log(denorm);
+        console.log("against denormalized:");
+        console.log(data[i]);
+
         expect(denorm).toEqual(data[i]);
       }
 
