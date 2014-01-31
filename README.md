@@ -74,6 +74,16 @@ console.log("this data has "+result.K+" clusters");
 console.log("cluster centroids = "+result.means);
 ```
 
+* Denormalize data
+
+Denormalization can be used to show the means discovered:
+
+```javascript
+for (var i= 0, l=result.means.length; i<l; i++) {
+    console.log(dataset.denormalizeDatum(result.means[i], ranges));
+}
+```
+
 Todo
 ----
 
