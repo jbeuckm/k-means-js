@@ -8,6 +8,9 @@
     "test": "jest",
     "build": "webpack --mode production"
   },
+  "jest": {
+    "testURL": "http://localhost/"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jbeuckm/K-Means.git"
@@ -23,6 +26,7 @@
     "@babel/preset-env": "^7.2.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.4",
+    "jest": "^21.3.0-beta.15",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2"
   }
