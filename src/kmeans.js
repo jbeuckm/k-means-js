@@ -1,21 +1,18 @@
-var rcp = require("./randomClusterPoints");
-/*
- * K-Means clustering implementation
- */
+import randomClusterPoints from "./randomClusterPoints";
 
 /**
  * Find the average distance between the means.
  * @param means
  * @return {Number}
  */
-exports.findAverageMeanSeparation = function(means) {
+const findAverageMeanSeparation = means => {
   var sum = 0,
     count = 0;
   var l = means.length;
 
   for (var i = 0; i < l - 1; i++) {
     for (var j = i + 1; j < l; j++) {
-      sum += exports.distance(means[i], means[j]);
+      sum += distance(means[i], means[j]);
       count++;
     }
   }
@@ -29,7 +26,7 @@ exports.findAverageMeanSeparation = function(means) {
  * @param assignments
  * @return {Object}
  */
-exports.findAverageDistancePointToMean = function(points, means, assignments) {
+const findAverageDistancePointToMean = (points, means, assignments) => {
   if (points.length != assignments.length) {
     throw "points and assignments arrays must be of same dimension";
   }
@@ -38,7 +35,7 @@ exports.findAverageDistancePointToMean = function(points, means, assignments) {
   var count = points.length;
   for (var i = 0; i < count; i++) {
     var mean = means[assignments[i]];
-    sum += exports.distance(points[i], mean);
+    sum += distance(points[i], mean);
   }
   return sum / count;
 };
@@ -48,7 +45,7 @@ exports.findAverageDistancePointToMean = function(points, means, assignments) {
  * @param assignments
  * @return {Object}
  */
-exports.countPointsPerMean = function(assignments) {
+const countPointsPerMean = assignments => {
   var counts = {};
 
   for (var i = 0, l = assignments.length; i < l; i++) {
@@ -72,7 +69,7 @@ exports.countPointsPerMean = function(assignments) {
  * @param progress callback to report progress of the training
  * @return {Array}
  */
-exports.algorithm = function(points, k, progress) {
+const algorithm = (points, k, progress) => {
   // select k of the points as initial means
   var means = [];
   for (var i = 0; i < k; i++) {
@@ -81,20 +78,20 @@ exports.algorithm = function(points, k, progress) {
     means.push(point.slice(0));
   }
 
-  var oldAssignments,
-    assignments = exports.assignPointsToMeans(points, means);
+  let oldAssignments,
+    assignments = assignPointsToMeans(points, means);
 
-  var n = 0,
+  let n = 0,
     changeCount;
 
   do {
-    exports.moveMeansToCenters(points, assignments, means);
+    moveMeansToCenters(points, assignments, means);
 
     oldAssignments = assignments;
 
-    assignments = exports.assignPointsToMeans(points, means);
+    assignments = assignPointsToMeans(points, means);
 
-    changeCount = exports.countChangedAssignments(assignments, oldAssignments);
+    changeCount = countChangedAssignments(assignments, oldAssignments);
 
     if (progress) {
       progress(changeCount, n);
@@ -118,7 +115,7 @@ exports.algorithm = function(points, k, progress) {
  * @param means
  * @return {Array}
  */
-exports.moveMeansToCenters = function(points, assignments, means) {
+const moveMeansToCenters = function(points, assignments, means) {
   if (points.length != assignments.length) {
     throw "points and assignments arrays must be of same dimension";
   }
@@ -132,8 +129,7 @@ exports.moveMeansToCenters = function(points, assignments, means) {
       }
     }
 
-    if (assignedPoints.length > 0)
-      means[i] = exports.averagePosition(assignedPoints);
+    if (assignedPoints.length > 0) means[i] = averagePosition(assignedPoints);
   }
 
   return means;
@@ -145,7 +141,7 @@ exports.moveMeansToCenters = function(points, assignments, means) {
  * @param points
  * @return {Array}
  */
-exports.averagePosition = function(points) {
+const averagePosition = function(points) {
   var sums = points[0].slice(0);
 
   var pointCount = points.length;
@@ -171,7 +167,7 @@ exports.averagePosition = function(points) {
  * @param newAssignments
  * @return {Number}
  */
-exports.countChangedAssignments = function(oldAssignments, newAssignments) {
+const countChangedAssignments = function(oldAssignments, newAssignments) {
   if (oldAssignments.length != newAssignments.length) {
     throw "old and new assignment arrays must be of same dimension";
   }
@@ -190,11 +186,11 @@ exports.countChangedAssignments = function(oldAssignments, newAssignments) {
  * Return an array of closest mean index for each point.
  * @return {Array}
  */
-exports.assignPointsToMeans = function(points, means) {
+const assignPointsToMeans = function(points, means) {
   var assignments = [];
 
   for (var i = 0, l = points.length; i < l; i++) {
-    assignments.push(exports.findClosestMean(points[i], means));
+    assignments.push(findClosestMean(points[i], means));
   }
 
   return assignments;
@@ -207,12 +203,12 @@ exports.assignPointsToMeans = function(points, means) {
  * @param means
  * @return {Number}
  */
-exports.findClosestMean = function(point, means) {
+const findClosestMean = function(point, means) {
   var distances = [];
   for (var i = 0, l = means.length; i < l; i++) {
-    distances.push(exports.distance(point, means[i]));
+    distances.push(distance(point, means[i]));
   }
-  return exports.findIndexOfMinimum(distances);
+  return findIndexOfMinimum(distances);
 };
 
 /**
@@ -221,7 +217,7 @@ exports.findClosestMean = function(point, means) {
  * @param array
  * @return {Number}
  */
-exports.findIndexOfMinimum = function(array) {
+const findIndexOfMinimum = function(array) {
   var min = array[0],
     index = 0;
 
@@ -241,12 +237,12 @@ exports.findIndexOfMinimum = function(array) {
  * @param n
  * @return {Array}
  */
-exports.generateRandomPoints = function(ranges, n) {
-  rcp.init(ranges, 4, 1);
+const generateRandomPoints = function(ranges, n) {
+  randomClusterPoints.init(ranges, 4, 1);
 
   var points = [];
   for (var i = 0; i < n; i++) {
-    var mean = rcp.generatePoint();
+    var mean = randomClusterPoints.generatePoint();
     points.push(mean);
   }
 
@@ -259,7 +255,7 @@ exports.generateRandomPoints = function(ranges, n) {
  * @param dataPoints {Array} An array of same-length data arrays, eg. [ [0,2,7], [6,2,3] ]
  * @return {Array}
  */
-exports.findRanges = function(dataPoints) {
+const findRanges = function(dataPoints) {
   var firstPoint = dataPoints[0];
 
   var pointCount = dataPoints.length;
@@ -290,8 +286,8 @@ exports.findRanges = function(dataPoints) {
  * Euclidean distance between two points in arbitrary dimension
  * @return {Number}
  */
-exports.distance = function(point1, point2) {
-  return Math.sqrt(exports.squaredError(point1, point2));
+const distance = (point1, point2) => {
+  return Math.sqrt(squaredError(point1, point2));
 };
 
 /**
@@ -301,7 +297,7 @@ exports.distance = function(point1, point2) {
  * @param point2
  * @return {Number}
  */
-exports.squaredError = function(point1, point2) {
+const squaredError = (point1, point2) => {
   if (point1.length != point2.length) {
     throw "point1 and point2 must be of same dimension";
   }
@@ -321,7 +317,7 @@ exports.squaredError = function(point1, point2) {
  * @param assignments
  * @return {Object}
  */
-exports.sumSquaredError = function(points, means, assignments) {
+const sumSquaredError = (points, means, assignments) => {
   if (points.length != assignments.length) {
     throw "points and assignments arrays must be of same dimension";
   }
@@ -331,8 +327,23 @@ exports.sumSquaredError = function(points, means, assignments) {
 
   for (var i = 0; i < count; i++) {
     var mean = means[assignments[i]];
-    sum += exports.squaredError(points[i], mean);
+    sum += squaredError(points[i], mean);
   }
 
   return sum;
+};
+
+export default {
+  averagePosition,
+  algorithm,
+  distance,
+  findClosestMean,
+  generateRandomPoints,
+  findIndexOfMinimum,
+  assignPointsToMeans,
+  moveMeansToCenters,
+  countChangedAssignments,
+  findAverageMeanSeparation,
+  findRanges,
+  countPointsPerMean
 };

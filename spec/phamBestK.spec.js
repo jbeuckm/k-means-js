@@ -1,6 +1,7 @@
+import kmeans from "../src/kmeans";
+
 describe("Find best value of K", function() {
   var pbk = require("../src/phamBestK");
-  var kmeans = require("../src/kmeans");
   var points;
 
   beforeEach(function() {

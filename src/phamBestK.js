@@ -1,3 +1,5 @@
+import kmeans from "./kmeans";
+
 /*
  * Implement the optimal K-finding algorithm described by Pham, et al
  * http://www.ee.columbia.edu/~dpwe/papers/PhamDN05-kmeans.pdf
@@ -86,8 +88,6 @@ exports.f = function(
 };
 
 exports.findBestK = function(points, testLimit, progress) {
-  var kmeans = require("./kmeans");
-
   var result = {};
   var pham = {};
   var k = 1;
