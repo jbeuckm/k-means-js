@@ -1,5 +1,5 @@
 {
-  "name": "kmeans-js",
+  "name": "k-means-js",
   "version": "0.2.0",
   "author": "Joseph Beuckmnan <joe@beigerecords.com>",
   "description": "A basic Javascript implementation of the cluster analysis algorithm.",
