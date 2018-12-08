@@ -912,6 +912,13 @@ babel-jest@21.3.0-beta.15:
     babel-plugin-istanbul "^4.1.5"
     babel-preset-jest "21.3.0-beta.15"
 
+babel-jest@^23.6.0:
+  version "23.6.0"
+  resolved "https://registry.npmjs.org/babel-jest/-/babel-jest-23.6.0.tgz#a644232366557a2240a0c083da6b25786185a2f1"
+  dependencies:
+    babel-plugin-istanbul "^4.1.6"
+    babel-preset-jest "^23.2.0"
+
 babel-loader@^8.0.4:
   version "8.0.4"
   resolved "https://registry.npmjs.org/babel-loader/-/babel-loader-8.0.4.tgz#7bbf20cbe4560629e2e41534147692d3fecbdce6"
@@ -927,7 +934,7 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-istanbul@^4.1.5:
+babel-plugin-istanbul@^4.1.5, babel-plugin-istanbul@^4.1.6:
   version "4.1.6"
   resolved "http://registry.npmjs.org/babel-plugin-istanbul/-/babel-plugin-istanbul-4.1.6.tgz#36c59b2192efce81c5b378321b74175add1c9a45"
   dependencies:
@@ -940,6 +947,10 @@ babel-plugin-jest-hoist@21.3.0-beta.15:
   version "21.3.0-beta.15"
   resolved "https://registry.npmjs.org/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-21.3.0-beta.15.tgz#d3c08d0a38bf21f9a40f1c38106c127f722a6410"
 
+babel-plugin-jest-hoist@^23.2.0:
+  version "23.2.0"
+  resolved "https://registry.npmjs.org/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-23.2.0.tgz#e61fae05a1ca8801aadee57a6d66b8cefaf44167"
+
 babel-plugin-syntax-object-rest-spread@^6.13.0:
   version "6.13.0"
   resolved "http://registry.npmjs.org/babel-plugin-syntax-object-rest-spread/-/babel-plugin-syntax-object-rest-spread-6.13.0.tgz#fd6536f2bce13836ffa3a5458c4903a597bb3bf5"
@@ -949,6 +960,13 @@ babel-preset-jest@21.3.0-beta.15:
   resolved "https://registry.npmjs.org/babel-preset-jest/-/babel-preset-jest-21.3.0-beta.15.tgz#509c231749e2c713faf6a5d546361f3cebe37192"
   dependencies:
     babel-plugin-jest-hoist "21.3.0-beta.15"
+    babel-plugin-syntax-object-rest-spread "^6.13.0"
+
+babel-preset-jest@^23.2.0:
+  version "23.2.0"
+  resolved "https://registry.npmjs.org/babel-preset-jest/-/babel-preset-jest-23.2.0.tgz#8ec7a03a138f001a1a8fb1e8113652bf1a55da46"
+  dependencies:
+    babel-plugin-jest-hoist "^23.2.0"
     babel-plugin-syntax-object-rest-spread "^6.13.0"
 
 babel-register@^6.26.0:

@@ -24,7 +24,7 @@ describe("Dataset", function() {
     category: "discrete"
   };
 
-  var ranges;
+  let ranges, normalized;
 
   it("finds data ranges", function() {
     ranges = dataset.findRanges(params, data);
