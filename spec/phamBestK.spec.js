@@ -1,7 +1,7 @@
 import kmeans from "../src/kmeans";
+import { default as phamBestK } from "../src/phamBestK";
 
 describe("Find best value of K", function() {
-  var pbk = require("../src/phamBestK");
   var points;
 
   beforeEach(function() {
@@ -26,24 +26,24 @@ describe("Find best value of K", function() {
     var means = [[0, 0]];
     var assignments = [0, 0];
 
-    expect(pbk.clusterDistortions(points, means, assignments)).toEqual({
+    expect(phamBestK.clusterDistortions(points, means, assignments)).toEqual({
       0: 10
     });
-    expect(pbk.totalDistortion(points, means, assignments)).toEqual(10);
+    expect(phamBestK.totalDistortion(points, means, assignments)).toEqual(10);
   });
 
   it("calculates alpha", function() {
     var means = [[0, 0]];
 
-    expect(pbk.alpha(means, 1)).toBeUndefined();
+    expect(phamBestK.alpha(means, 1)).toBeUndefined();
 
     means.push([1, 1]);
 
-    expect(pbk.alpha(means, 1)).toEqual(1 - 3 / 8);
+    expect(phamBestK.alpha(means, 1)).toEqual(1 - 3 / 8);
 
     means.push([2, 2]);
 
-    expect(pbk.alpha(means, 2)).toEqual(2 + (1 - 2) / 6);
+    expect(phamBestK.alpha(means, 2)).toEqual(2 + (1 - 2) / 6);
   });
 
   it("calculates f(K)", function() {
@@ -51,15 +51,15 @@ describe("Find best value of K", function() {
     var pham = {};
     var k = 1;
 
-    result[k] = kmeans.algorithm(points, k);
-    pham[k] = pbk.f(points, result[k].means, result[k].assignments);
+    result[k] = kmeans.cluster(points, k);
+    pham[k] = phamBestK.f(points, result[k].means, result[k].assignments);
     console.log(k + " => " + pham[k].f);
     expect(pham[k].f).toEqual(1);
     k++;
 
     while (k < 10) {
-      result[k] = kmeans.algorithm(points, k);
-      pham[k] = pbk.f(
+      result[k] = kmeans.cluster(points, k);
+      pham[k] = phamBestK.f(
         points,
         result[k].means,
         result[k].assignments,
@@ -84,7 +84,7 @@ describe("Find best value of K", function() {
   });
 
   it("estimates the best value for K", function() {
-    var bestK = pbk.findBestK(points, 10);
+    var bestK = phamBestK.findBestK(points, 10);
     expect(bestK.K).toBeGreaterThan(1);
     expect(bestK.K).toBeLessThan(10);
 

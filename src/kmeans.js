@@ -69,7 +69,7 @@ const countPointsPerMean = assignments => {
  * @param progress callback to report progress of the training
  * @return {Array}
  */
-const algorithm = (points, k, progress) => {
+const cluster = (points, k, progress) => {
   // select k of the points as initial means
   var means = [];
   for (var i = 0; i < k; i++) {
@@ -335,7 +335,7 @@ const sumSquaredError = (points, means, assignments) => {
 
 export default {
   averagePosition,
-  algorithm,
+  cluster,
   distance,
   findClosestMean,
   generateRandomPoints,

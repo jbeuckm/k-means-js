@@ -5,7 +5,7 @@ import kmeans from "./kmeans";
  * http://www.ee.columbia.edu/~dpwe/papers/PhamDN05-kmeans.pdf
  */
 
-exports.squaredError = function(point1, point2) {
+const squaredError = (point1, point2) => {
   if (point1.length != point2.length) {
     throw "point1 and point2 must be of same dimension";
   }
@@ -19,7 +19,7 @@ exports.squaredError = function(point1, point2) {
   return sum;
 };
 
-exports.clusterDistortions = function(points, means, assignments) {
+const clusterDistortions = (points, means, assignments) => {
   var distortions = {};
 
   for (var i = 0, l = points.length; i < l; i++) {
@@ -28,14 +28,14 @@ exports.clusterDistortions = function(points, means, assignments) {
     if (!distortions.hasOwnProperty(meanIndex)) {
       distortions[meanIndex] = 0;
     }
-    distortions[meanIndex] += exports.squaredError(points[i], means[meanIndex]);
+    distortions[meanIndex] += squaredError(points[i], means[meanIndex]);
   }
 
   return distortions;
 };
 
-exports.totalDistortion = function(points, means, assignments) {
-  var distortions = exports.clusterDistortions(points, means, assignments);
+const totalDistortion = (points, means, assignments) => {
+  var distortions = clusterDistortions(points, means, assignments);
 
   var sum = 0;
   for (var i in distortions) {
@@ -45,7 +45,7 @@ exports.totalDistortion = function(points, means, assignments) {
   return sum;
 };
 
-exports.alpha = function(means, alpha_K_minus_1) {
+const alpha = (means, alpha_K_minus_1) => {
   var N_dim = means[0].length;
   var K = means.length;
 
@@ -59,47 +59,47 @@ exports.alpha = function(means, alpha_K_minus_1) {
   }
 };
 
-exports.f = function(
+const f = (
   points,
   means,
   assignments,
   alpha_K_minus_1,
   distortion_K_minus_1
-) {
+) => {
   var K = means.length;
 
-  var distortion = exports.totalDistortion(points, means, assignments);
-  var alpha = exports.alpha(means, alpha_K_minus_1);
+  var distortion = totalDistortion(points, means, assignments);
+  var _alpha = alpha(means, alpha_K_minus_1);
 
   var f;
 
   if (K == 1 || distortion_K_minus_1 == 0) {
     f = 1;
   } else {
-    f = distortion / (alpha * distortion_K_minus_1);
+    f = distortion / (_alpha * distortion_K_minus_1);
   }
 
   return {
     K: K,
     distortion: distortion,
-    alpha: alpha,
+    alpha: _alpha,
     f: f
   };
 };
 
-exports.findBestK = function(points, testLimit, progress) {
+const findBestK = (points, testLimit, progress) => {
   var result = {};
   var pham = {};
   var k = 1;
 
-  result[k] = kmeans.algorithm(points, k);
-  pham[k] = exports.f(points, result[k].means, result[k].assignments);
+  result[k] = kmeans.cluster(points, k);
+  pham[k] = f(points, result[k].means, result[k].assignments);
   console.log(k + " => " + pham[k].f);
   k++;
 
   while (k < testLimit) {
-    result[k] = kmeans.algorithm(points, k);
-    var newPham = exports.f(
+    result[k] = kmeans.cluster(points, k);
+    var newPham = f(
       points,
       result[k].means,
       result[k].assignments,
@@ -122,12 +122,12 @@ exports.findBestK = function(points, testLimit, progress) {
 
   var bestK;
   var minF = Number.MAX_VALUE;
-  var f = {};
+  var _f = {};
   var bestMeans;
 
   for (var i in pham) {
     var pham_i = pham[i];
-    f[i] = pham_i.f;
+    _f[i] = pham_i.f;
 
     if (pham_i.f < minF) {
       minF = pham_i.f;
@@ -137,8 +137,16 @@ exports.findBestK = function(points, testLimit, progress) {
   }
 
   return {
-    f: f,
+    f: _f,
     K: bestK,
     means: bestMeans
   };
+};
+
+export default {
+  findBestK,
+  f,
+  clusterDistortions,
+  alpha,
+  totalDistortion
 };
