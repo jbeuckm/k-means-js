@@ -1,10 +1,6 @@
-var kmeans = require('./lib/kmeans');
-
-var ranges = [
-  [0, 100],
-  [0, 100],
-  [0, 100]
-];
+var kmeans = require("./dist/main").default;
+console.log(kmeans);
+var ranges = [[0, 100], [0, 100], [0, 100]];
 
 var points = kmeans.generateRandomPoints(ranges, 1000);
 

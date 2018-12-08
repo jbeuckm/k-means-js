@@ -1,18 +1,28 @@
 {
-    "name": "K-Means",
-    "version": "0.1.0",
-    "author": "Joe Beuckmnan <joe@beigerecords.com>",
-    "description": "A basic Javascript implementation of the cluster analysis algorithm.",
-    "scripts": {
-        "test": "jasmine-node spec/*.spec.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jbeuckm/K-Means.git"
-    },
-    "keywords": [
-        "machine learning",
-        "cluster analysis",
-        "k-means"
-    ]
+  "name": "kmeans-js",
+  "version": "0.2.0",
+  "author": "Joseph Beuckmnan <joe@beigerecords.com>",
+  "description": "A basic Javascript implementation of the cluster analysis algorithm.",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jbeuckm/K-Means.git"
+  },
+  "keywords": [
+    "machine learning",
+    "cluster analysis",
+    "k-means"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  }
 }

@@ -1,0 +1,7 @@
+{
+  presets: ["@babel/preset-env"],
+  plugins: [
+    // adding this one solved the issue
+    "@babel/plugin-transform-modules-commonjs"
+  ]
+}
