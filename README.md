@@ -6,6 +6,11 @@ A basic Javascript implementation of the [cluster analysis] [1] algorithm.
 
   [1]: http://en.wikipedia.org/wiki/K-means_clustering "wikipedia article"
 
+Install
+-------
+
+```npm i @jbeuckm/k-means-js --save```
+
 Usage
 -----
 
@@ -36,9 +41,10 @@ var data = [
     }
 ];
 
+import { dataset } from '@jbeuckm/k-means-js'
 
-var ranges = require('dataset').findRanges(params, data);
-var normalized = require('dataset').normalize(data, ranges);
+var ranges = dataset.findRanges(params, data);
+var normalized = dataset.normalize(data, ranges);
 ```
 
 
@@ -54,10 +60,12 @@ var points = [
 
 var k = 3;
 
-var means = require('kmeans').algorithm(points, k, console.log);
+import kmeans from '@jbeuckm/k-means-js'
+
+var means = kmeans.cluster(points, k, console.log);
 ```
 
-The call to algorithm() will find the data's range in each dimension, generate k=3 random points, and iterate until the means are static.
+The call to cluster() will find the data's range in each dimension, generate k=3 random points, and iterate until the means are static.
 
 * Find the best K
 
@@ -65,10 +73,10 @@ The method described by [Pham, et al.](http://www.ee.columbia.edu/~dpwe/papers/P
 The algorithm evaluates K-means repeatedly for different values of K, and returns the best (guess) value for K as well as the set of means found during evaluation.
 
 ```javascript
-var pbk = require('phamBestK');
+import { phamBestK } from '@jbeuckm/k-means-js'
 
 var maxKToTest = 10;
-var result = pbk.findBestK(points, maxKToTest);
+var result = phamBestK.findBestK(points, maxKToTest);
 
 console.log("this data has "+result.K+" clusters");
 console.log("cluster centroids = "+result.means);
