@@ -6,15 +6,15 @@
  * @param {array} data - Array of labeled vectors to be normalized
  *
  */
-const findRanges = function(params, data) {
-  var ranges = {};
+const findRanges = function (params, data) {
+  const ranges = {};
 
-  for (var i = 0, l = data.length; i < l; i++) {
-    var datum = data[i];
-    for (var label in datum) {
+  for (let i = 0, l = data.length; i < l; i++) {
+    const datum = data[i];
+    for (const label in datum) {
       if (!ranges.hasOwnProperty(label)) {
-        var newField = {
-          type: params[label] || "linear"
+        const newField = {
+          type: params[label] || "linear",
         };
 
         switch (newField.type) {
@@ -30,9 +30,9 @@ const findRanges = function(params, data) {
         ranges[label] = newField;
       }
 
-      var fieldRange = ranges[label];
+      const fieldRange = ranges[label];
 
-      var fieldValue = datum[label];
+      const fieldValue = datum[label];
 
       switch (fieldRange.type) {
         // collect unique values for this field
@@ -54,7 +54,7 @@ const findRanges = function(params, data) {
     }
   }
 
-  for (var i in ranges) {
+  for (const i in ranges) {
     switch (ranges[i].type) {
       case "linear":
         ranges[i].range = ranges[i].max - ranges[i].min;
@@ -68,24 +68,26 @@ const findRanges = function(params, data) {
 /*
  * Normalize a set of data objects for K-Means analysis
  */
-const normalize = function(data, ranges) {
-  var normalizedData = [];
+const normalize = function (data, ranges, weights = {}) {
+  const normalizedData = [];
 
-  for (var i = 0, l = data.length; i < l; i++) {
-    var datum = data[i];
+  for (let i = 0, l = data.length; i < l; i++) {
+    const datum = data[i];
 
-    var normalizedDatum = [];
+    const normalizedDatum = [];
 
-    for (var label in datum) {
-      var fieldValue = datum[label];
-      var range = ranges[label];
+    for (const label in datum) {
+      const fieldValue = datum[label];
+      const range = ranges[label];
+
+      const weight = weights[label] || 1;
 
       switch (range.type) {
         case "discrete":
           // generate a binary vector indicating category of this data
-          for (var j = 0, k = range.values.length; j < k; j++) {
+          for (let j = 0, k = range.values.length; j < k; j++) {
             if (range.values[j] == fieldValue) {
-              normalizedDatum.push(1);
+              normalizedDatum.push(weight);
             } else {
               normalizedDatum.push(0);
             }
@@ -93,7 +95,9 @@ const normalize = function(data, ranges) {
           break;
 
         case "linear":
-          normalizedDatum.push((fieldValue - range.min) / range.range);
+          normalizedDatum.push(
+            ((fieldValue - range.min) / range.range) * weight
+          );
           break;
       }
     }
@@ -104,28 +108,28 @@ const normalize = function(data, ranges) {
   return normalizedData;
 };
 
-const denormalizeDatum = function(normalizedDatum, ranges) {
-  var denorm = {};
+const denormalizeDatum = function (normalizedDatum, ranges) {
+  const denorm = {};
 
-  var vectorPosition = 0;
+  let vectorPosition = 0;
 
-  for (var i in ranges) {
-    var normalizedField = normalizedDatum[vectorPosition];
-    var range = ranges[i];
+  for (const i in ranges) {
+    const normalizedField = normalizedDatum[vectorPosition];
+    const range = ranges[i];
 
-    var denormalizedValue;
+    let denormalizedValue;
 
     switch (range.type) {
       // choose the most strongly represented category for a discrete field
       case "discrete":
-        var subVectorLength = range.values.length;
-        var fieldSubVector = normalizedDatum.slice(
+        const subVectorLength = range.values.length;
+        const fieldSubVector = normalizedDatum.slice(
           vectorPosition,
           vectorPosition + subVectorLength
         );
 
-        var max_index = -1;
-        var max_value = Number.MIN_VALUE;
+        let max_index = -1;
+        let max_value = Number.MIN_VALUE;
         for (var j = 0; j < subVectorLength; j++) {
           if (fieldSubVector[j] > max_value) {
             max_value = fieldSubVector[j];
@@ -154,5 +158,5 @@ const denormalizeDatum = function(normalizedDatum, ranges) {
 export default {
   normalize,
   findRanges,
-  denormalizeDatum
+  denormalizeDatum,
 };

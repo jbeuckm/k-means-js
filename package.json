@@ -1,15 +1,12 @@
 {
   "name": "@jbeuckm/k-means-js",
-  "version": "0.5.0",
-  "author": "Joseph Beuckmnan <joe@beigerecords.com>",
+  "version": "0.6.0",
+  "author": "Joseph Beuckman <joe@beigerecords.com>",
   "description": "A basic Javascript implementation of the cluster analysis algorithm.",
   "main": "./dist/main.js",
   "scripts": {
     "test": "jest",
     "build": "webpack --mode production"
-  },
-  "jest": {
-    "testURL": "http://localhost/"
   },
   "repository": {
     "type": "git",
@@ -27,8 +24,8 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
-    "jest": "^21.3.0-beta.15",
-    "webpack": "^4.27.1",
-    "webpack-cli": "^3.1.2"
+    "jest": "29.7.0",
+    "webpack": "^4.47.0",
+    "webpack-cli": "^3.3.12"
   }
 }
