@@ -1,6 +1,6 @@
 {
   "name": "@jbeuckm/k-means-js",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "author": "Joseph Beuckman <joe@beigerecords.com>",
   "description": "A basic Javascript implementation of the cluster analysis algorithm.",
   "main": "./dist/main.js",
