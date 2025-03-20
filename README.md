@@ -18,13 +18,13 @@ The normalizer will scale numerical data between [0,1] and will generate n outpu
 
 ```javascript
 // Tell the normalizer about the category field.
-var params = {
+const params = {
   category: "discrete",
 };
 
 // Category is a discrete field with two possible values.
 // Value is a linear field with continuous possible values.
-var data = [
+const data = [
   {
     category: "a",
     value: 25,
@@ -41,8 +41,14 @@ var data = [
 
 import { dataset } from "@jbeuckm/k-means-js";
 
-var ranges = dataset.findRanges(params, data);
-var normalized = dataset.normalize(data, ranges);
+// Get ranges for normalizing and denormalizing the data
+const ranges = dataset.findRanges(params, data);
+
+// Optionally, set the relative importance of one or more fields
+// *The default weight for any field is one.*
+const weights = { category: 2 };
+
+const normalized = dataset.normalize(data, ranges, weights);
 ```
 
 - Run the algorithm.
@@ -59,7 +65,7 @@ var k = 3;
 
 import kmeans from "@jbeuckm/k-means-js";
 
-var means = kmeans.cluster(points, k, console.log);
+const means = kmeans.cluster(points, k, console.log);
 ```
 
 The call to cluster() will find the data's range in each dimension, generate k=3 random points, and iterate until the means are static.
@@ -72,8 +78,8 @@ The algorithm evaluates K-means repeatedly for different values of K, and return
 ```javascript
 import { phamBestK } from "@jbeuckm/k-means-js";
 
-var maxKToTest = 10;
-var result = phamBestK.findBestK(points, maxKToTest);
+const maxKToTest = 10;
+const result = phamBestK.findBestK(points, maxKToTest);
 
 console.log("this data has " + result.K + " clusters");
 console.log("cluster centroids = " + result.means);
@@ -84,7 +90,7 @@ console.log("cluster centroids = " + result.means);
 Denormalization can be used to show the means discovered:
 
 ```javascript
-for (var i = 0, l = result.means.length; i < l; i++) {
+for (let i = 0, l = result.means.length; i < l; i++) {
   console.log(dataset.denormalizeDatum(result.means[i], ranges));
 }
 ```
@@ -94,3 +100,4 @@ for (var i = 0, l = result.means.length; i < l; i++) {
 - ~denormalize data~
 - provide ability to label data points, dimensions and means
 - build an asynchronous version of the algorithm
+- Typescript
